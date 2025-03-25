@@ -13,4 +13,6 @@ class homepageController extends Controller
     public function signup() {
         return view("signup");
     }
+
+
 }

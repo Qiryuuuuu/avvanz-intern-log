@@ -9,8 +9,6 @@ class TodoController extends Controller
 {
     // Todo view
     public function todo(){
-        $todos = todo::all();
-
         $pendingCount = todo::where('status' , 'pending')->count();
         $doingCount = todo::where('status' , 'doing')->count();
         $doneCount = todo::where('status' , 'done')->count();
@@ -21,8 +19,6 @@ class TodoController extends Controller
 
         return view('todo.index', 
         [
-            'todos' => $todos, 
-            
             'pendingCount'=> $pendingCount,
             'doingCount'=> $doingCount,
             'doneCount' => $doneCount,
@@ -75,5 +71,19 @@ class TodoController extends Controller
     public function delete(Todo $todo){
         $todo->delete();
         return redirect(route('todo.index'))->with('delete', 'Task deleted successfully');
+    }
+
+    // Change status
+    public function updateStatus(Todo $todo, $status){
+        //Validate the status value
+        if(!in_array($status, ['Pending', 'Doing', 'Done'])){
+            return redirect(route('todo.index'))->with('Invalid', "Status value is invalid");
+        }
+
+        //Update the todo status value
+        $todo->status = $status;
+        $todo->save();
+
+        return redirect()->route('todo.index')->with('success', 'Task status updated to ' . $status);
     }
 }

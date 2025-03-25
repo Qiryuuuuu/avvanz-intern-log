@@ -11,6 +11,10 @@ Route::get('/', [homepageController::class,'home'])->name('home');
 //Route for the sign up page
 Route::get('/signup', [homepageController::class,'signup'])->name('signup');
 
+//Route for the todo page
+Route::get('/dashboard/todo', [TodoController::class, 'todo'])->name('dashboard.todo');
+
+
 //Insert data route
 Route::get('/account-creation', [homepageController::class,'accountCreation'])->name('accountCreation');
 
@@ -32,3 +36,6 @@ Route::put('/todo/{todo}/update', [TodoController::class, 'update'])->name('todo
 
 //Delete method
 Route::delete('/todo/{todo}/delete', [TodoController::class, 'delete'])->name('todo.delete');
+
+//Change status
+Route::get('/todo/{todo}/update/{status}', [TodoController::class, 'updateStatus'])->name('todo.status');
