@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-</head>
-<body>
+@extends('layouts.dashboard')
+
+@section('title', 'To-do')
+
+@section('content')
+
+@include('partials._navTodo')
+
     <h1>Add task</h1>
     <a href="{{  route('todo.index')  }}">Go to Dashboard</a>
 
@@ -27,5 +26,4 @@
 
         <input type="submit" placeholder="Add task">
     </form>
-</body>
-</html>
+@endsection

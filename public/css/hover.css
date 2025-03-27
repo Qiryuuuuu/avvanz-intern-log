@@ -1,0 +1,17 @@
+.btn-add-task {
+    background-color: #2A4B7C;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-add-task:hover {
+    background-color: #1a3a6b !important    
+    ; 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+.btn-add-task i {
+    transition: transform 0.3s ease;
+}
+.btn-add-task:hover i {
+    transform: rotate(90deg); 
+}

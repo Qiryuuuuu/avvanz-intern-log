@@ -10,7 +10,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{ route('notebook.index') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi bi-book-half align-middle"></i> <span class="ms-1 d-none d-sm-inline align-middle">Notebook</span></a>
                     </li>
                     <li>

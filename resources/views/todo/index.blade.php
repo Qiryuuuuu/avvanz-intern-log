@@ -1,28 +1,10 @@
-@extends('layouts.todo')
+@extends('layouts.dashboard')
 
 @section('title', 'To-do')
 
 @section('content')
 
-
-<nav class="navbar navbar-light bg-light p-3 rounded-3 shadow-sm"> 
-    <div class="container-fluid"> 
-      <div class="d-flex align-items-center"> 
-        <i class="fs-2 bi bi-list-task me-2"></i>
-        <h1 class="m-0">To-do</h1>
-      </div>
-      
-      <div class="ms-auto"> 
-        <a href="{{ route('todo.create') }}" 
-           class="btn text-decoration-none px-4 py-3 rounded-4 d-flex align-items-center gap-2"
-           style="background-color: #2A4B7C; color: white;">
-          <i class="bi bi-plus-circle-fill me-1" style="color: #E6A71F;"></i>
-          <span class="d-none d-sm-inline">Add Task</span>
-        </a>
-      </div>
-    </div>
-  </nav>
-
+@include('partials._navTodo')
 
 @php
     $taskStatuses = [
@@ -33,25 +15,25 @@
 @endphp
 
 <div class="container-fluid my-4">
-    <div class="row gy-3">
-        <div class="col d-flex justify-content-center">
-            <div class="card rounded-4" style="width: 35rem;">
+    <div class="row g-3">
+        <div class="col-md-4 d-flex">
+            <div class="card rounded-top-4 w-100">
                 <div class="card-body text-center">
                   <h5 class="card-title">Pending: {{ $pendingCount }} <span class="fw-normal fs-6">{{ $pendingCount <= 1 ? 'task' : 'tasks' }}</span></h5>
                 </div>
             </div>
         </div>
 
-        <div class="col d-flex justify-content-center">
-            <div class="card rounded-4" style="width: 35rem;">
+        <div class="col-md-4 d-flex">
+            <div class="card rounded-top-4 w-100">
                 <div class="card-body text-center">
                   <h5 class="card-title">Doing: {{ $doingCount }} <span class="fw-normal fs-6">{{ $doingCount <= 1 ? 'task' : 'tasks' }}</span></h5>
                 </div>
             </div>
         </div>
 
-        <div class="col d-flex justify-content-center">
-            <div class="card rounded-4" style="width: 35rem;">
+        <div class="col-md-4 d-flex">
+            <div class="card rounded-top-4 w-100">
                 <div class="card-body text-center">
                   <h5 class="card-title">Done: {{ $doneCount }} <span class="fw-normal fs-6">{{ $doneCount <= 1 ? 'task' : 'tasks' }} </span></h5>
                 </div>
@@ -65,7 +47,7 @@
     <div class="row">
         @foreach($taskStatuses as $status => $tasks)
         <div class="col-md-4 mb-4"> <!-- Using col-md-4 for 3 cards per row on medium screens -->
-            <div class="card h-100 rounded-5"> <!-- Added h-100 for equal height cards -->
+            <div class="card h-100 rounded-bottom-5"> <!-- Added h-100 for equal height cards -->
                 <div class="card-body">
                     <h5 class="card-title my-3 text-center">{{ $status }}</h5>
                     
