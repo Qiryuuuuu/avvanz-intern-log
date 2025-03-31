@@ -14,7 +14,7 @@
                             <i class="fs-4 bi bi-book-half align-middle"></i> <span class="ms-1 d-none d-sm-inline align-middle">Notebook</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{ route('dtr.index') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-clock-fill align-middle"></i> <span class="ms-1 d-none d-sm-inline align-middle">Daily Time Record</span> </a>
                     </li>
                 </ul>
@@ -25,8 +25,6 @@
                         <span class="d-none d-sm-inline mx-1">Avvanzer</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">

@@ -38,9 +38,11 @@
                     <input type="text" class="last-name" placeholder="Last name">
                 </div>
 
-                <input type="text" class="email-input" placeholder="Email">
+                <input type="number" class="hours-input" placeholder="Internship Duration (hr)">
+                <input type="text" class="pass-input" placeholder="Confirm password">
                 <input type="password" class="pass-input" placeholder="Password">
                 <input type="password" class="pass-input" placeholder="Confirm password">
+
 
                 <button type="submit">Sign up</button>
             </div>

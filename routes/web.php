@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\NotebookController;
+use App\Http\Controllers\DtrController;
 
 
 //Route for the home page
@@ -60,3 +61,17 @@ Route::delete('/notebook/{note}/delete', [NotebookController::class, 'nbDelete']
 
 //Show method
 Route::get('/notebook/{note}/show', [NotebookController::class, 'nbShow'])->name('notebook.show');
+
+
+//DTR 
+//Index view
+Route::get('/daily-time-record', [DtrController::class, 'index'])->name('dtr.index');
+
+//Time in
+Route::post('/daily-time-record/time-in', [DtrController::class, 'timeIn'])->name('dtr.timeIn');
+
+//Time out
+Route::put('/daily-time-record/time-out/{id}', [DtrController::class, 'timeOut'])->name('dtr.timeOut');
+
+//Render hours method
+Route::post('/daily-time-record/to-render', [DtrController::class, 'toRender'])->name('dtr.toRender');
