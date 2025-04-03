@@ -7,15 +7,15 @@ use App\Models\Todo;
 
 class TodoController extends Controller
 {
-    // Todo view
+    // Todo view - now shows only authenticated user's todos
     public function todo(){
-        $pendingCount = todo::where('status' , 'pending')->count();
-        $doingCount = todo::where('status' , 'doing')->count();
-        $doneCount = todo::where('status' , 'done')->count();
+        $pendingCount = auth()->user()->todos()->where('status', 'pending')->count();
+        $doingCount = auth()->user()->todos()->where('status', 'doing')->count();
+        $doneCount = auth()->user()->todos()->where('status', 'done')->count();
 
-        $pendingTasks = todo::where('status', 'pending')->get();
-        $doingTasks = todo::where('status' , 'doing')->get();
-        $doneTasks = todo::where('status' , 'done')->get();
+        $pendingTasks = auth()->user()->todos()->where('status', 'pending')->get();
+        $doingTasks = auth()->user()->todos()->where('status', 'doing')->get();
+        $doneTasks = auth()->user()->todos()->where('status', 'done')->get();
 
         return view('todo.index', 
         [
@@ -27,15 +27,14 @@ class TodoController extends Controller
             'doingTasks'=> $doingTasks,
             'doneTasks' => $doneTasks,
         ]);
-
     }
 
-    // Create view
+    // Create view (no changes needed)
     public function create(){
         return view('todo.create');
     }
 
-    // Store method
+    // Store method - now associates todo with authenticated user
     public function store(Request $request){
         // Validate the user input
         $data = $request->validate([
@@ -44,18 +43,29 @@ class TodoController extends Controller
             'status' => 'required'
         ]);
 
-       $newTodo = Todo::create($data);
+        // Create todo for the authenticated user
+        $newTodo = auth()->user()->todos()->create($data);
 
-       return redirect(route('todo.index'));
+        return redirect(route('todo.index'));
     }
 
-    // Edit view
+    // Edit view - now checks if todo belongs to user
     public function edit(Todo $todo){
+        // Verify the todo belongs to the authenticated user
+        if($todo->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('todo.edit', ['todo' => $todo]);
     }
 
-    // Update method
+    // Update method - now checks if todo belongs to user
     public function update(Todo $todo, Request $request){
+        // Verify the todo belongs to the authenticated user
+        if($todo->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $data = $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -64,20 +74,30 @@ class TodoController extends Controller
 
         $todo->update($data);
 
-        return redirect(route('todo.index'))->with('success', 'Task added successfully');
+        return redirect(route('todo.index'))->with('success', 'Task updated successfully');
     }
 
-    // Delete method
+    // Delete method - now checks if todo belongs to user
     public function delete(Todo $todo){
+        // Verify the todo belongs to the authenticated user
+        if($todo->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $todo->delete();
         return redirect(route('todo.index'))->with('delete', 'Task deleted successfully');
     }
 
-    // Change status
+    // Change status - now checks if todo belongs to user
     public function updateStatus(Todo $todo, $status){
+        // Verify the todo belongs to the authenticated user
+        if($todo->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         //Validate the status value
-        if(!in_array($status, ['Pending', 'Doing', 'Done'])){
-            return redirect(route('todo.index'))->with('Invalid', "Status value is invalid");
+        if(!in_array($status, ['pending', 'doing', 'done'])){
+            return redirect(route('todo.index'))->with('error', "Status value is invalid");
         }
 
         //Update the todo status value
