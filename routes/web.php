@@ -80,7 +80,8 @@ Route::post('/daily-time-record/to-render', [DtrController::class, 'toRender'])-
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard',[]         
+    );
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
