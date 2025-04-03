@@ -49,11 +49,18 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get all todos for the user.
-     */
+
+
+
     public function todos(): HasMany
     {
         return $this->hasMany(Todo::class);
     }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    
 }

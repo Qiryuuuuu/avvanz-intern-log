@@ -16,27 +16,6 @@ Route::get('/signup', [homepageController::class,'signup'])->name('signup');
 
 
 
-//Notebook route
-//Index notebook dashboard
-Route::get('/notebook', [NotebookController::class, 'nbIndex'])->name('notebook.index');
-
-//Create view route
-Route::get('/notebook/create', [NotebookController::class, 'nbCreate'])->name('notebook.create');
-
-//Store method
-Route::post('/notebook/store', [NotebookController::class, 'nbStore'])->name('notebook.store');
-
-//Edit screen
-Route::get('/notebook/{note}/edit', [NotebookController::class, 'nbEdit'])->name('notebook.edit');
-
-//Update method
-Route::put('/notebook/{note}/update', [NotebookController::class, 'nbUpdate'])->name('notebook.update');
-
-//Delete method
-Route::delete('/notebook/{note}/delete', [NotebookController::class, 'nbDelete'])->name('notebook.delete');
-
-//Show method
-Route::get('/notebook/{note}/show', [NotebookController::class, 'nbShow'])->name('notebook.show');
 
 
 //DTR 
@@ -81,6 +60,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/todo/{todo}/delete', [TodoController::class, 'delete'])->name('todo.delete');
     // Todo - Change status
     Route::get('/todo/{todo}/update/{status}', [TodoController::class, 'updateStatus'])->name('todo.status');
+
+
+    //Notebook route
+    //Index notebook dashboard
+    Route::get('/notebook', [NotebookController::class, 'nbIndex'])->name('notebook.index');
+    //Create view route
+    Route::get('/notebook/create', [NotebookController::class, 'nbCreate'])->name('notebook.create');
+    //Store method
+    Route::post('/notebook/store', [NotebookController::class, 'nbStore'])->name('notebook.store');
+    //Edit screen
+    Route::get('/notebook/{note}/edit', [NotebookController::class, 'nbEdit'])->name('notebook.edit');
+    //Update method
+    Route::put('/notebook/{note}/update', [NotebookController::class, 'nbUpdate'])->name('notebook.update');
+    //Delete method
+    Route::delete('/notebook/{note}/delete', [NotebookController::class, 'nbDelete'])->name('notebook.delete');
+    //Show method
+    Route::get('/notebook/{note}/show', [NotebookController::class, 'nbShow'])->name('notebook.show');
 
 });
 
